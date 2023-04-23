@@ -1,6 +1,6 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-const shapes = require('./lib/shapes');
+const generateLogo = require('./lib/generateLogo');
 
 const questions = [{
    type: 'input',
@@ -22,3 +22,16 @@ const questions = [{
    message: 'Enter a color or hexadecimal number for the logo.',
    name: 'color'
 }];
+function writeToFile(data) {
+   const fileName = `./output/index.html`;
+   fs.writeFile(fileName, data, (err) => 
+   err ? console.log(err) : console.log(`Successfully created ${fileName}`)
+   );
+}
+function init() {
+   inquirer .prompt(questions)
+   .then((data) => {
+      writeToFile(generateLogo(data))
+   })
+}
+init();
