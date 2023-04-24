@@ -1,6 +1,8 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-const generateLogo = require('./lib/generateLogo');
+const generateLogo = require('./lib/generateLogo.js');
+const { Circle, Triangle, Square } = require('./lib/shapes.js');
+const SVG = require('./lib/SVG.js');
 
 const questions = [{
    type: 'input',
@@ -15,23 +17,37 @@ const questions = [{
 {
    type: 'list',
    message: 'Pick a shape for your logo.',
-   options: ['circle', 'triangle', 'square']
+   name: 'choose_shape',
+   choices: ['circle', 'triangle', 'square']
 },
 {
    type: 'input',
    message: 'Enter a color or hexadecimal number for the logo.',
    name: 'color'
 }];
-function writeToFile(data) {
-   const fileName = `./output/index.html`;
-   fs.writeFile(fileName, data, (err) => 
-   err ? console.log(err) : console.log(`Successfully created ${fileName}`)
-   );
-}
+//    fs.writeFile(fileName, data, (err) => 
+//    err ? console.log(err) : console.log(`Successfully created ${fileName}`)
+//    );
+// }
 function init() {
-   inquirer .prompt(questions)
-   .then((data) => {
-      writeToFile(generateLogo(data))
-   })
+   inquirer.prompt(questions)
+      .then((data) => {
+         let newShape = ''
+         if (data.choose_shape == "circle") {
+            newShape = new Circle();
+         }
+         else if (data.choose_shape == "triangle") {
+            newShape = new Triangle();
+         }
+         else {
+            newShape = new Square();
+         }
+         const logoText = data.logo_text;
+         newShape.setColor(data.color);
+         const svg = new SVG()
+         svg.setInfoText(logoText, data.text_color)
+         svg.setShapeInfo(newShape)
+         fs.writeFileSync(`${data.choose_shape}.svg`,svg.render())
+      })
 }
 init();
