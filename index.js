@@ -25,10 +25,7 @@ const questions = [{
    message: 'Enter a color or hexadecimal number for the logo.',
    name: 'color'
 }];
-//    fs.writeFile(fileName, data, (err) => 
-//    err ? console.log(err) : console.log(`Successfully created ${fileName}`)
-//    );
-// }
+
 function init() {
    inquirer.prompt(questions)
       .then((data) => {
