@@ -16,7 +16,6 @@ Creating SVG logos
     SVG images are created so the images dont lose their original dimensions when they are scaled to a different size. The edges are much more precise and professional rather than conventional images used as logos. For your next logo design, I highly recommend creating SVG images.
 
 link to video [(https://drive.google.com/file/d/1WBVMTaq_naDwej7N2tZTPMwr1fkv3m2R/view)]
-![./assets/images/circle.svg]
 
   ## Credits
     I had assistance from classmates, instructors, and Google on this project.
